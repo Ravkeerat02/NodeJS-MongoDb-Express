@@ -1,5 +1,6 @@
 const fs = require('fs');
 const http = require('http') ; 
+const url = require('url') ;
 
 // fs - refers to file system module
 // http - gives networking capabiloties
@@ -36,7 +37,15 @@ const http = require('http') ;
 // ********************SERVER***********************
 // requires call back function
 const server = http.createServer((req, res) => {
-    res.end('Hello from the server')
+    const pathName = req.url;
+    if(pathName === '/' || pathName === '/overview'){
+        res.end('Hello from the server')
+    }else if(pathName === '/product'){
+        res.end('This is the product')
+    }else{
+        res.writeHead(404); 
+        res.end('Pgae not found')
+    }
 });
 // listen - takes in few params(port-computer address(local))
 server.listen(8000,'127.0.0.1', () =>{
