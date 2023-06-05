@@ -37,6 +37,12 @@ const url = require('url') ;
 
 // ********************SERVER***********************
 // requires call back function
+
+// top level is executed only once when code is executed
+// will read the data and parse the json as a a string 
+const data = fs.readFileSync(`${__dirname}/dev-data/data.json`,'utf-8');
+const productData = JSON.parse(data);
+
 const server = http.createServer((req, res) => {
     const pathName = req.url;
     if(pathName === '/' || pathName === '/overview'){
@@ -45,16 +51,13 @@ const server = http.createServer((req, res) => {
         res.end('This is the product')
     }else if (pathName === '/api'){
         // reads the content in the data.json file - content is gonna be in json - __ - refers to current file 
-        fs.readFile(`${__dirname}/dev-data/data.json`,'utf-8',(err,data) =>{
-            // converts json into string 
-            const productData = JSON.parse(data); 
+        // fs.readFile(`${__dirname}/dev-data/data.json`,'utf-8',(err,data) =>{
+        //     // converts json into string 
+        //     const productData = JSON.parse(data); 
             // console.log(productData);
             // sends back the data in json format
             res.writeHead(200,{'Content-type':'application/json'})
             res.end(data)
-        })
-        
-        
     }else{
         // head - response we are about to send
         res.writeHead(404,{
