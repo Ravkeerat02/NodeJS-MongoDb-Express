@@ -2,6 +2,7 @@ const fs = require('fs');
 const http = require('http') ; 
 const url = require('url') ;
 
+
 // fs - refers to file system module
 // http - gives networking capabiloties
 // async version of file sync
@@ -42,9 +43,24 @@ const server = http.createServer((req, res) => {
         res.end('Hello from the server')
     }else if(pathName === '/product'){
         res.end('This is the product')
+    }else if (pathName === '/api'){
+        // reads the content in the data.json file - content is gonna be in json - __ - refers to current file 
+        fs.readFile(`${__dirname}/dev-data/data.json`,'utf-8',(err,data) =>{
+            // converts json into string 
+            const productData = JSON.parse(data); 
+            // console.log(productData);
+            // sends back the data in json format
+            res.writeHead(200,{'Content-type':'application/json'})
+            res.end(data)
+        })
+        
+        
     }else{
-        res.writeHead(404); 
-        res.end('Pgae not found')
+        // head - response we are about to send
+        res.writeHead(404,{
+            'Content-type' : 'text/html'
+        }); 
+        res.end('<h2>Pgae not found</h2>')
     }
 });
 // listen - takes in few params(port-computer address(local))
