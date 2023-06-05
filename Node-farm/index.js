@@ -40,24 +40,28 @@ const url = require('url') ;
 
 // top level is executed only once when code is executed
 // will read the data and parse the json as a a string 
+const tempOverview  = fs.readFileSync(`${__dirname}/templates/template-overview.html`,'utf-8');
+// const tempCard = fs.readFileSync(`${__dirname}/templates/template-card`,'utf-8');
+// const tempProduct = fs.readFileSync(`${__dirname}/product/template-product`,'utf-8');
+
+
 const data = fs.readFileSync(`${__dirname}/dev-data/data.json`,'utf-8');
-const productData = JSON.parse(data);
+const dataObj  = JSON.parse(data);
 
 const server = http.createServer((req, res) => {
     const pathName = req.url;
+    // overview page
     if(pathName === '/' || pathName === '/overview'){
-        res.end('Hello from the server')
+        res.writeHead(200,{'Content-type':'text/html'})
+        res.end(tempOverview);
+    // PRODUCT PAGE 
     }else if(pathName === '/product'){
         res.end('This is the product')
+    // API
     }else if (pathName === '/api'){
-        // reads the content in the data.json file - content is gonna be in json - __ - refers to current file 
-        // fs.readFile(`${__dirname}/dev-data/data.json`,'utf-8',(err,data) =>{
-        //     // converts json into string 
-        //     const productData = JSON.parse(data); 
-            // console.log(productData);
-            // sends back the data in json format
             res.writeHead(200,{'Content-type':'application/json'})
             res.end(data)
+    // NOT FOUND
     }else{
         // head - response we are about to send
         res.writeHead(404,{
