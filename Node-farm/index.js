@@ -1,6 +1,8 @@
+// core modules
 const fs = require('fs');
 const http = require('http') ; 
 const url = require('url') ;
+const replaceTemplate = require('./module/replaceTemplate')
 
 
 // fs - refers to file system module
@@ -40,22 +42,7 @@ const url = require('url') ;
 
 // top level is executed only once when code is executed
 // will read the data and parse the json as a a string 
-const replaceTemplate = (temp, product) => {
-    let output = temp.replace(/{%PRODUCTNAME%}/g, (product && product.productName) || '');
-    output = output.replace(/{%IMAGE%}/g, (product && product.image) || '');
-    output = output.replace(/{%PRICE%}/g, (product && product.price) || '');
-    output = output.replace(/{%FROM%}/g, (product && product.from) || '');
-    output = output.replace(/{%NUTRIENTS%}/g, (product && product.nutrients) || '');
-    output = output.replace(/{%QUANTITY%}/g, (product && product.quantity) || '');
-    output = output.replace(/{%DESCRIPTION%}/g, (product && product.description) || '');
-    output = output.replace(/{%ID%}/g, (product && product.id) || '');
-  
-    if (product && !product.organic) {
-      output = output.replace(/{%NOT_ORGANIC%}/g, 'not-organic');
-    }
-  
-    return output;
-  };
+
 
 const tempOverview  = fs.readFileSync(`${__dirname}/templates/template-overview.html`,'utf-8');
 const tempCard = fs.readFileSync(`${__dirname}/templates/template-card.html`,'utf-8');
