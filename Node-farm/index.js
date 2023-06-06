@@ -40,21 +40,22 @@ const url = require('url') ;
 
 // top level is executed only once when code is executed
 // will read the data and parse the json as a a string 
-const replaceTemplate = (temp , product) => {
-    // g - makes it global - for the mentioned item 
-    let output = temp.replace(/{%ID%}/g,product.id) ; 
-        output = output.replace(/{%PRODUCTNAME%}/g,product.productName) ; 
-        output = output.replace(/{%IMAGE%}/g,product.image); 
-        output = output.replace(/{%FROM%}/g,product.from) ; 
-        output = output.replace(/{%NUTRIENTS%}/g,product.nutrients) ; 
-        output = output.replace(/{%QUANTITY%}/g,product.quantity) ; 
-        output = output.replace(/{%PRICE%}/g,product.price) ; 
-        output = output.replace(/{%DESCRIPTION%}/g,product.description) ; 
-        
-        if(!product.organic) output = output.replace(/{%NOT_ORGANIC%}/g,'not-organic') ; 
-        return output ; 
-
-}
+const replaceTemplate = (temp, product) => {
+    let output = temp.replace(/{%PRODUCTNAME%}/g, (product && product.productName) || '');
+    output = output.replace(/{%IMAGE%}/g, (product && product.image) || '');
+    output = output.replace(/{%PRICE%}/g, (product && product.price) || '');
+    output = output.replace(/{%FROM%}/g, (product && product.from) || '');
+    output = output.replace(/{%NUTRIENTS%}/g, (product && product.nutrients) || '');
+    output = output.replace(/{%QUANTITY%}/g, (product && product.quantity) || '');
+    output = output.replace(/{%DESCRIPTION%}/g, (product && product.description) || '');
+    output = output.replace(/{%ID%}/g, (product && product.id) || '');
+  
+    if (product && !product.organic) {
+      output = output.replace(/{%NOT_ORGANIC%}/g, 'not-organic');
+    }
+  
+    return output;
+  };
 
 const tempOverview  = fs.readFileSync(`${__dirname}/templates/template-overview.html`,'utf-8');
 const tempCard = fs.readFileSync(`${__dirname}/templates/template-card.html`,'utf-8');
@@ -66,29 +67,31 @@ const data = fs.readFileSync(`${__dirname}/dev-data/data.json`,'utf-8');
 const dataObj  = JSON.parse(data);
 
 const server = http.createServer((req, res) => {
-    const {query , pathaname } = url.parse(req.url,true);
+    const {query , pathname } = url.parse(req.url,true);
     // overview page
-    if(pathaname === '/' || pathaname === '/overview'){
+    if(pathname === '/' || pathname === '/overview'){
         res.writeHead(200,{'Content-type':'text/html'})
         // map - for each element - something is returned
         // looping - over the obj
         const cardsHtml = dataObj.map(el => replaceTemplate(tempCard ,el )).join('') 
         const output = tempOverview.replace('{%PRODUCT_CARD%}',cardsHtml)
-
         res.end(output);
+
     // PRODUCT PAGE 
-    }else if(pathaname === '/product'){
-        // it will display the data correspoding to the ID
-        res.writeHead(200,{'Content-type':'text/html'})
-        const product = dataObj[query.id]
-        const output = replaceTemplate(tempProduct , product)
-        res.end(output)
+    }else if (pathname === '/product') {
+        res.writeHead(200, {
+          'Content-type': 'text/html'
+        });
+        const product = dataObj[query.id];
+        const output = replaceTemplate(tempProduct, product);
+        res.end(output);
+    
     // API
-    }else if (pathaname === '/api'){
+    }else if (pathname === '/api'){
             res.writeHead(200,{'Content-type':'application/json'})
             res.end(data)
     // NOT FOUND
-    }else{
+    // }else{
         // head - response we are about to send
         res.writeHead(404,{
             'Content-type' : 'text/html'
