@@ -53,10 +53,8 @@ const replaceTemplate = (temp , product) => {
         
         if(!product.organic) output = output.replace(/{%NOT_ORGANIC%}/g,'not-organic') ; 
         return output ; 
-    
 
 }
-
 
 const tempOverview  = fs.readFileSync(`${__dirname}/templates/template-overview.html`,'utf-8');
 const tempCard = fs.readFileSync(`${__dirname}/templates/template-card.html`,'utf-8');
@@ -68,22 +66,25 @@ const data = fs.readFileSync(`${__dirname}/dev-data/data.json`,'utf-8');
 const dataObj  = JSON.parse(data);
 
 const server = http.createServer((req, res) => {
-    const pathName = req.url;
+    const {query , pathaname } = url.parse(req.url,true);
     // overview page
-    if(pathName === '/' || pathName === '/overview'){
+    if(pathaname === '/' || pathaname === '/overview'){
         res.writeHead(200,{'Content-type':'text/html'})
         // map - for each element - something is returned
         // looping - over the obj
         const cardsHtml = dataObj.map(el => replaceTemplate(tempCard ,el )).join('') 
         const output = tempOverview.replace('{%PRODUCT_CARD%}',cardsHtml)
-        
 
         res.end(output);
     // PRODUCT PAGE 
-    }else if(pathName === '/product'){
-        res.end('This is the product')
+    }else if(pathaname === '/product'){
+        // it will display the data correspoding to the ID
+        res.writeHead(200,{'Content-type':'text/html'})
+        const product = dataObj[query.id]
+        const output = replaceTemplate(tempProduct , product)
+        res.end(output)
     // API
-    }else if (pathName === '/api'){
+    }else if (pathaname === '/api'){
             res.writeHead(200,{'Content-type':'application/json'})
             res.end(data)
     // NOT FOUND
