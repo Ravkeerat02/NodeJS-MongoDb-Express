@@ -2,6 +2,8 @@ const fs = require('fs');
 const crypto = require('crypto');
 
 const start = Date.now();
+// after how many iterations the next will occur 
+process.env.UV_THREADPOOL_SIZE = 2;
 // set timer - using arrow function 
 // not running inside I/O loop
 setTimeout(() => console.log("TImer 1 finished"), 0);
@@ -22,10 +24,20 @@ fs.readFile('test-file.txt' , () =>{
     process.nextTick(() => console.log("Process.nextTick"));
 
     // using crypto module - length , iteration and how strong it will be 
-    crypto.pbkdf2('password', 'salt', 100000, 528, 'sha512', () => {
-        console.log(Date.now(), 'Password encrypted');
+    crypto.pbkdf2Sync('password', 'salt', 100000, 528, 'sha512', () => {
+        console.log(Date.now() - start, 'Password encrypted');
+    })
+    // works in sybc way 
+    crypto.pbkdf2Sync('password', 'salt', 100000, 528, 'sha512', () => {
+        console.log(Date.now() - start, 'Password encrypted');
     });
-    
+    crypto.pbkdf2Sync('password', 'salt', 100000, 528, 'sha512', () => {
+        console.log(Date.now() - start, 'Password encrypted');
+    });
+    crypto.pbkdf2Sync('password', 'salt', 100000, 528, 'sha512', () => {
+        console.log(Date.now() - start, 'Password encrypted');
+    });
+
 });
 
 console.log("Hello from top-level code");
