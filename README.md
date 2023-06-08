@@ -8,3 +8,4 @@
       -  API - [Creating API](https://github.com/Ravkeerat02/Node-JS-MongoDb-Express/blob/main/Node-farm/index.js)
       -  Template - [Node Farm](https://github.com/Ravkeerat02/Node-JS-MongoDb-Express/tree/main/Node-farm/templates)
       -  Module - [Creating own module](https://github.com/Ravkeerat02/Node-JS-MongoDb-Express/tree/main/Node-farm/module) 
+      -  Slugs - [Creating and using them](https://github.com/Ravkeerat02/Node-JS-MongoDb-Express/blob/main/Node-farm/index.js)
