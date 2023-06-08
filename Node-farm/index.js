@@ -2,7 +2,10 @@
 const fs = require('fs');
 const http = require('http') ; 
 const url = require('url') ;
+// for creating slugs - last part of URL 
+const slugify = require('slugify'); 
 const replaceTemplate = require('./module/replaceTemplate')
+
 
 
 // fs - refers to file system module
@@ -52,6 +55,11 @@ const tempProduct = fs.readFileSync(`${__dirname}/templates/template-product.htm
 const data = fs.readFileSync(`${__dirname}/dev-data/data.json`,'utf-8');
 // Dataaobj -> array -> data(json format)
 const dataObj  = JSON.parse(data);
+
+// creating slugs for the product
+// using map to use all the products by creating a slug for easy call
+const slugs = dataObj.map(el => slugify(el.productName,{lower:true})) 
+console.log(slugs); 
 
 const server = http.createServer((req, res) => {
     const {query , pathname } = url.parse(req.url,true);
