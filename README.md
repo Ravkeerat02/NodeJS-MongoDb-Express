@@ -13,4 +13,5 @@
       -  Slugs - [Creating and using them](https://github.com/Ravkeerat02/Node-JS-MongoDb-Express/blob/main/Node-farm/index.js)
 
   - How nodeJs work ?
-      - Event - [Event Loop](https://github.com/Ravkeerat02/Node-JS-MongoDb-Express/blob/main/How-node-works/event-loop.js)     
+      - Event - [Event Loop](https://github.com/Ravkeerat02/Node-JS-MongoDb-Express/blob/main/How-node-works/event-loop.js)
+      - Crypto - [Crypto module](https://github.com/Ravkeerat02/Node-JS-MongoDb-Express/blob/main/How-node-works/event-loop.js)
