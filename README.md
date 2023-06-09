@@ -16,3 +16,4 @@
       - Event - [Event Loop](https://github.com/Ravkeerat02/Node-JS-MongoDb-Express/blob/main/How-node-works/event-loop.js)
       - Crypto - [Crypto module](https://github.com/Ravkeerat02/Node-JS-MongoDb-Express/blob/main/How-node-works/event-loop.js)
       - Stream - [Stream Module](https://github.com/Ravkeerat02/Node-JS-MongoDb-Express/blob/main/How-node-works/streams.js)
+      - Module - [Learning module](https://github.com/Ravkeerat02/Node-JS-MongoDb-Express/blob/main/How-node-works/modules.js)
