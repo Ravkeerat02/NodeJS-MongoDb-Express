@@ -1,53 +1,58 @@
 const fs = require('fs');
-const { resolve } = require('path');
 const superagent = require('superagent');
 
-// Promise function takes in an executor function (asynchronous code)
+// Promise function to read a file
 const readFilePro = file => {
   return new Promise((resolve, reject) => {
     fs.readFile(file, (err, data) => {
-      // Result of the error handler
-      if (err) reject('Could not find it');
+      if (err) reject('I could not find that file 😢');
       resolve(data);
     });
   });
 };
 
-// creating Promise function - takes in file and thing thats been worked upon
+// Promise function to write to a file
 const writeFilePro = (file, data) => {
-    return new Promise((resolve, reject) => {
-        fs.writeFile(file, data, err => {
-            if(err) reject('Nothing was found');
-            resolve('Success . WE FOUND IT') ;
-        });
+  return new Promise((resolve, reject) => {
+    fs.writeFile(file, data, err => {
+      if (err) reject('No modification allowed');
+      resolve('Yepieeeeeeeeeeeeeee');
     });
-};  
-        
+  });
+};
 
-readFilePro(`${__dirname}/dog.txt`)
-  .then(data => {
+// Async function to get dog pictures
+const getDogPic = async () => {
+  try {
+    const data = await readFilePro(`${__dirname}/dog.txt`);
     console.log(`Breed: ${data}`);
 
-    // Returns a promise - pending promise (no data returned)
-    return superagent.get(`https://dog.ceo/api/breed/${data}/images/random`)
-    })
-  .then(res => {
-    console.log(res.body.message);
-    return writeFilePro('dog-img.txt', res.body.message);
+    // Send multiple requests concurrently using Promise.all
+    const res1Pro = superagent.get(`https://dog.ceo/api/breed/${data}/images/random`);
+    const res2Pro = superagent.get(`https://dog.ceo/api/breed/${data}/images/random`);
+    const res3Pro = superagent.get(`https://dog.ceo/api/breed/${data}/images/random`);
+    const all = await Promise.all([res1Pro, res2Pro, res3Pro]);
+    const imgs = all.map(el => el.body.message);
+    console.log(imgs);
 
-    // fs.writeFile('dog-img.txt', res.body.message, err => {
-    //   if (err) {
-    //     console.log('Error writing to file');
-    //     return;
-    //   }
-    //   console.log('Dog saved');
-    // });f
-  })
-// Used for returning an error
-    .then(()=>{
-        console.log('IMAGE SAVED'); 
-        
-    }) 
-    .catch(err => {
-        console.log(err.message);
-  });
+    // Write images to a file
+    await writeFilePro('dog-img.txt', imgs.join('\n'));
+    console.log('Image saved to file!');
+  } catch (err) {
+    console.log(err);
+
+    throw err;
+  }
+  return '2: READY 🐶';
+};
+
+(async () => {
+  try {
+    console.log('1: Will get dog pics!');
+    const x = await getDogPic();
+    console.log(x);
+    console.log('3: Done getting dog pics!');
+  } catch (err) {
+    console.log('ERROR 💥');
+  }
+})();
