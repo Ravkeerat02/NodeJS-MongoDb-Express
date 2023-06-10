@@ -46,6 +46,7 @@ const getDogPic = async () => {
   return '2: READY 🐶';
 };
 
+// Getting the input(result)
 (async () => {
   try {
     console.log('1: Will get dog pics!');
