@@ -20,3 +20,4 @@
 
   - Asynchronous JS
       - Async JS - [Introduction to async](https://github.com/Ravkeerat02/Node-JS-MongoDb-Express/tree/main/async-js)     
+      - Promise - [Improving code using Promise](https://github.com/Ravkeerat02/Node-JS-MongoDb-Express/blob/main/async-js/index.js)
