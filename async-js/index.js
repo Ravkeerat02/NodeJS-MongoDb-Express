@@ -28,9 +28,11 @@ const getDogPic = async () => {
     console.log(`Breed: ${data}`);
 
     // Send multiple requests concurrently using Promise.all
+    // getting the resilt for all3 requests at the same time 
     const res1Pro = superagent.get(`https://dog.ceo/api/breed/${data}/images/random`);
     const res2Pro = superagent.get(`https://dog.ceo/api/breed/${data}/images/random`);
     const res3Pro = superagent.get(`https://dog.ceo/api/breed/${data}/images/random`);
+    // looping all 3 at the same time - so it can be executed all togdther
     const all = await Promise.all([res1Pro, res2Pro, res3Pro]);
     const imgs = all.map(el => el.body.message);
     console.log(imgs);
