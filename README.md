@@ -24,4 +24,5 @@
       - Improving Code - [Using async func](https://github.com/Ravkeerat02/Node-JS-MongoDb-Express/blob/main/async-js/index.js)
 
   - Express
-    - Express -[Setting up](https://github.com/Ravkeerat02/Node-JS-MongoDb-Express/blob/main/natours/app.js)   
+    - Express -[Setting up](https://github.com/Ravkeerat02/Node-JS-MongoDb-Express/blob/main/natours/app.js)
+    - API - [API Setup](https://github.com/Ravkeerat02/Node-JS-MongoDb-Express/blob/main/natours/app.js)   
