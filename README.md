@@ -1,6 +1,8 @@
 ### Learning NodeJS - MongoDb - Express
 
-- Referring to this course : [NodeJS Bootcamp](https://github.com/jonasschmedtmann/complete-node-bootcamp) 
+- Referring to this course : 
+  - Code Repo - [Code Repo](https://github.com/jonasschmedtmann/complete-node-bootcamp)
+  - Course - [Course Link](https://www.udemy.com/course/nodejs-express-mongodb-bootcamp) 
 
 - Includes the following
   -   Introduction to Node.js and NPM - Node Farm
