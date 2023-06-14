@@ -1,6 +1,8 @@
 ### Learning NodeJS - MongoDb - Express
 
-- Referring to this course : [NodeJS Bootcamp](https://github.com/jonasschmedtmann/complete-node-bootcamp) 
+- Referring to this course : 
+  - Code Repo - [Code Repo](https://github.com/jonasschmedtmann/complete-node-bootcamp)
+  - Course - [Course Link](https://www.udemy.com/course/nodejs-express-mongodb-bootcamp) 
 
 - Includes the following
   -   Introduction to Node.js and NPM - Node Farm
@@ -24,4 +26,5 @@
       - Improving Code - [Using async func](https://github.com/Ravkeerat02/Node-JS-MongoDb-Express/blob/main/async-js/index.js)
 
   - Express
-    - Express -[Setting up](https://github.com/Ravkeerat02/Node-JS-MongoDb-Express/blob/main/natours/app.js)   
+    - Express -[Setting up](https://github.com/Ravkeerat02/Node-JS-MongoDb-Express/blob/main/natours/app.js)
+    - API - [API Setup](https://github.com/Ravkeerat02/Node-JS-MongoDb-Express/blob/main/natours/app.js)   
