@@ -29,3 +29,4 @@
     - Express -[Setting up](https://github.com/Ravkeerat02/Node-JS-MongoDb-Express/blob/main/natours/app.js)
     - API - [API Setup](https://github.com/Ravkeerat02/Node-JS-MongoDb-Express/blob/main/natours/app.js)
     - Request - [POST req](https://github.com/Ravkeerat02/Node-JS-MongoDb-Express/blob/main/natours/app.js)   
+    - GET BY ID -[Get(id)](https://github.com/Ravkeerat02/Node-JS-MongoDb-Express/blob/main/natours/app.js)
