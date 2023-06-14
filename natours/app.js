@@ -6,11 +6,10 @@ const port = 3000 ;
 app.use(express.json()); // middleware - modifies the incoming data
 
 // // setting up route
+// refactoring code
 
-// reding the file data - converting the file format
-const tours = JSON.parse(fs.readFileSync(`${__dirname}/dev-data/data/tours-simple.json`))
-// should specify version of API(if being used)
-app.get('/api/v1/tours',(req, res)=>{
+// diplays all tours
+const getAllTours = (req, res)=>{
     res.status(200).json({
         status: 'success',
         // makes sense with more data(multipe obj)
@@ -20,10 +19,9 @@ app.get('/api/v1/tours',(req, res)=>{
             tours: tours
         }
     })
-})
+}
 
-// taking post request - creates a new tour 
-app.post('/api/v1/tours', (req , res) =>{
+const updateTour = (req , res) =>{
     // console.log(req.body);
     
     // creates the new id
@@ -42,14 +40,11 @@ app.post('/api/v1/tours', (req , res) =>{
            }
         });     
     });
-})
+}
 
-// getting a single tour using ID
-// OPTIONAL PARAM(?) 
-app.get('/api/v1/tours/:id',(req, res)=>{
+const getById  = (req, res)=>{
     // converts the string to number
     const id = req.params.id * 1;
-
     if(!tour){
         // 404 - not found
         return res.status(404).json({
@@ -65,10 +60,9 @@ app.get('/api/v1/tours/:id',(req, res)=>{
             tour
         }
     })
-})
+}
 
-// updating the specifci data 
-app.patch('/api/v1/tours/:id', (req, res) =>{
+const updateTourID =  (req, res) =>{
     if(req.params.id * 1 > tours.length){
         return res.status(404).json({
             status: 'fail',
@@ -81,10 +75,9 @@ app.patch('/api/v1/tours/:id', (req, res) =>{
             tour: '<Updated tour here>'
         }
     })
-})
+}
 
-// deleting the data
-app.delete('/api/v1/tours/:id', (req, res) =>{
+const deleteTour =  (req, res) =>{
     if(req.params.id * 1 > tours.length){
         return res.status(404).json({
             status: 'fail',
@@ -96,8 +89,33 @@ app.delete('/api/v1/tours/:id', (req, res) =>{
         status: 'success',
         data: null
     });
-});
+}
+// reding the file data - converting the file format
+const tours = JSON.parse(fs.readFileSync(`${__dirname}/dev-data/data/tours-simple.json`))
+// should specify version of API(if being used)
+// app.get('/api/v1/tours', getAllTours)
 
+// // taking post request - creates a new tour 
+// app.post('/api/v1/tours', updateTour)
+
+// // getting a single tour using ID
+// // OPTIONAL PARAM(?) 
+// app.get('/api/v1/tours/:id', getById)
+
+// // updating the specifci data 
+// app.patch('/api/v1/tours/:id',updateTourID)
+
+// // deleting the data
+// app.delete('/api/v1/tours/:id', deleteTour );
+
+// Making it short and readable
+app.route('/api/v1/tours')
+.get(getAllTours)
+.post(updateTour)
+app.route('/api/v1/tours/:id')
+.get(getById)
+.patch(updateTourID)
+.delete(deleteTour)
 
 // starts the server
 app.listen(port , () =>{
