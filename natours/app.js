@@ -4,7 +4,10 @@ const app = express();
 const port = 3000;
 
 app.use(express.json());
-
+app.use((req , res , next ) =>{
+    console.log('hello from the middleware');
+    next();
+})
 // Helper functions
 const getAllTours = (req, res) => {
   // Return all tours
