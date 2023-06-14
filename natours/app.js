@@ -44,6 +44,21 @@ app.post('/api/v1/tours', (req , res) =>{
     });
 })
 
+// getting a single tour using ID
+// OPTIONAL PARAM(?) 
+app.get('/api/v1/tours/:id',(req, res)=>{
+    // converts the string to number
+    const id = req.params.id * 1;
+    const tour = tours.find(el => el.id === req.params.id * 1);
+    res.status(200).json({
+        status: 'success',
+
+        data:{
+            tour
+        }
+    })
+})
+
 // starts the server
 app.listen(port , () =>{
     console.log(`listening on port ${port}`)
