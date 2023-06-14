@@ -50,7 +50,7 @@ app.get('/api/v1/tours/:id',(req, res)=>{
     // converts the string to number
     const id = req.params.id * 1;
 
-    if(id > tours.length){
+    if(!tour){
         // 404 - not found
         return res.status(404).json({
             status: 'fail',
