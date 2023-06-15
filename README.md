@@ -33,3 +33,4 @@
     - Update - [Update req](https://github.com/Ravkeerat02/Node-JS-MongoDb-Express/blob/main/natours/app.js)
     - Delete- [Delete req](https://github.com/Ravkeerat02/Node-JS-MongoDb-Express/blob/main/natours/app.js)
     - Code Cleanup - [Refactoreed code](https://github.com/Ravkeerat02/Node-JS-MongoDb-Express/tree/main/natours)
+    - Setup - [Static File setup](https://github.com/Ravkeerat02/Node-JS-MongoDb-Express/blob/main/natours/app.js)
