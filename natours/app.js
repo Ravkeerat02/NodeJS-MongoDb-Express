@@ -1,5 +1,6 @@
 const express = require('express');
 const fs = require('fs');
+const { get } = require('http');
 const app = express();
 const morgan = require('morgan');
 const port = 3000;
@@ -7,8 +8,6 @@ const port = 3000;
 // will return a function to similar to the one we created(middlwware) 
 // in simple words - returns detailed information about the package(requested) 
 app.use(morgan('dev'));
-
-
 app.use(express.json());
 // creating middleware
 app.use((req , res , next ) =>{
@@ -123,6 +122,42 @@ const deleteTour = (req, res) => {
   });
 };
 
+const getAllUsers = (req, res) => {
+  res.status(500).json({
+    status: 'error',
+    message: 'This route is not yet defined',
+  });
+};
+
+const createUser = (req, res) => {
+  res.status(500).json({
+    status: 'error',
+    message: 'This route is not yet defined',
+  });
+};
+
+const getUser = (req, res) => {
+  res.status(500).json({
+    status: 'error',
+    message: 'This route is not yet defined',
+  });
+};
+
+const updateUser = (req, res) => {
+  res.status(500).json({
+    status: 'error',
+    message: 'This route is not yet defined',
+  });
+};
+
+const deleteUser = (req, res) => {
+  res.status(500).json({
+    status: 'error',
+    message: 'This route is not yet defined',
+  });
+};
+
+
 // Read tours data from file
 const tours = JSON.parse(fs.readFileSync(`${__dirname}/dev-data/data/tours-simple.json`));
 
@@ -135,6 +170,9 @@ app.route('/api/v1/tours/:id')
   .get(getById)       // Get a tour by ID
   .patch(updateTourID) // Update a tour by ID
   .delete(deleteTour); // Delete a tour by ID
+
+app.route('api/v1/users').get(getAllUsers).post(createUser);
+app.route('api/v1/users/:id').get(getUser).patch(updateUser).delete(deleteUser);
 
   // ROUTES
 
