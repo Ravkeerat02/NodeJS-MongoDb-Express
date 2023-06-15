@@ -4,16 +4,27 @@ const app = express();
 const port = 3000;
 
 app.use(express.json());
+// creating middleware
 app.use((req , res , next ) =>{
     console.log('hello from the middleware');
+    // important to use when creating middleware
+    next();
+}); 
+app.use((req , res , next ) =>{
+    // converts into readable string
+    req.requestTime = new Date().toISOString();
     next();
 })
+
+
 // Helper functions
 const getAllTours = (req, res) => {
   // Return all tours
+//   console.log(req.requestTime);
   res.status(200).json({
     status: 'success',
     results: tours.length,
+    requestedAt : req.requestTime,
     data: {
       tours: tours,
     },
