@@ -1,7 +1,13 @@
 const express = require('express');
 const fs = require('fs');
 const app = express();
+const morgan = require('morgan');
 const port = 3000;
+
+// will return a function to similar to the one we created(middlwware) 
+// in simple words - returns detailed information about the package(requested) 
+app.use(morgan('dev'));
+
 
 app.use(express.json());
 // creating middleware
@@ -129,6 +135,10 @@ app.route('/api/v1/tours/:id')
   .get(getById)       // Get a tour by ID
   .patch(updateTourID) // Update a tour by ID
   .delete(deleteTour); // Delete a tour by ID
+
+  // ROUTES
+
+
 
 // starts the server
 app.listen(port , () =>{
