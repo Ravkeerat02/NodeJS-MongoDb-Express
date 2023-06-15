@@ -1,7 +1,10 @@
 const express = require('express')
 const tourController = require('../controller/tourController')
-
 const router = express.Router()
+
+// creating parameter
+router.param('id', tourController.checkID)
+
 // API tour routes
 router.route('/')
   .get(tourController.getAllTours)   // Get all tours
