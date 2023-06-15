@@ -11,6 +11,9 @@ const app = express();
 app.use(express.json());
 app.use(morgan('dev'));
 
+// setting up static
+app.use(express.static(`${__dirname}/public`))
+
 // API routes
 app.use('/api/v1/users', userRouter);
 app.use('/api/v1/tours', tourRouter);
