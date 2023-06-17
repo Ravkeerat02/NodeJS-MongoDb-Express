@@ -38,12 +38,7 @@ exports.getTour = async (req, res) => {
 
 exports.createTour = async (req, res) => {
   try {
-    const newTour = await Tour.create({
-      name: req.body.name,
-      price: req.body.price,
-      rating: req.body.rating
-    });
-
+    const newTour = await Tour.create(req.body);
     res.status(201).json({
       status: 'success',
       data: {
@@ -53,7 +48,7 @@ exports.createTour = async (req, res) => {
   } catch (err) {
     res.status(400).json({
       status: 'fail',
-      message: err.message
+      message: err
     });
   }
 };
@@ -74,7 +69,7 @@ exports.updateTour = async (req, res) => {
   } catch (err) {
     res.status(400).json({
       status: 'fail',
-      message: err.message
+      message: err
     });
   }
 };
@@ -90,7 +85,7 @@ exports.deleteTour = async (req, res) => {
   } catch (err) {
     res.status(400).json({
       status: 'fail',
-      message: err.message
+      message: err
     });
   }
 };
