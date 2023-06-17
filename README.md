@@ -40,4 +40,5 @@
     - Setting up - [Setting up MongoDb](https://github.com/Ravkeerat02/Node-JS-MongoDb-Express/blob/main/natours/server.js)
     - Features - [Basic features added](https://github.com/Ravkeerat02/NodeJS-MongoDb-Express/blob/main/natours/controller/tourcontroller.js)
     - Enhanced Features
-      - Filtering -[Basic/Advance](https://github.com/Ravkeerat02/NodeJS-MongoDb-Express/blob/main/natours/controller/tourcontroller.js)  
+      - Filtering -[Basic/Advance](https://github.com/Ravkeerat02/NodeJS-MongoDb-Express/blob/main/natours/controller/tourcontroller.js)
+      - Sorting - [Sorting](https://github.com/Ravkeerat02/NodeJS-MongoDb-Express/blob/main/natours/controller/tourcontroller.js)
