@@ -94,6 +94,17 @@ tourSchema.pre('find',function(next){
 }) 
 const Tour = mongoose.model('Tour', tourSchema);
 
+// Aggregation Middlware - happends before or after an aggreagte function
+tourSchema.pre('aggregate',function(next){
+  
+  // adds in stat of an array
+  this.piepleine().unshift({
+    $match : {secretTour : {$ne : true}}
+  })
+  console.log(this.pipeline());
+  next()
+})
+
 module.exports = Tour;
 
 
