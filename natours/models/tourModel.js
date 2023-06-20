@@ -53,7 +53,11 @@ const tourSchema = new mongoose.Schema({
     type: Date,
     default: Date.now()
   },
-  startDates: [Date]
+  startDates: [Date],
+  secretTour :{
+    type : Boolean , 
+    default : false 
+  }
 },{
   // for the options
   toJSON :  {virtuals: true},
@@ -61,6 +65,7 @@ const tourSchema = new mongoose.Schema({
 
 });
 
+// DOCUMENT MIDLWARE
 // setting up virtual properties - CANT BE YSED IN QUERY - belongs to the console not the controller
 // arrow functin cant use this directly but a regular dunction can 
 // middleware - can either be before or after a fucntion is being called and processed
@@ -80,6 +85,13 @@ tourSchema.virtual('durationWeek').get(function(){
 //   next()
 // })
 
+// QUERY MIDDLEWARE - CAN RUN BEFORE/AFTER ANY QUERY
+tourSchema.pre('find',function(next){
+  this.find({
+    secreTOUR : {$ne : 'true'}
+  })
+  next();
+}) 
 const Tour = mongoose.model('Tour', tourSchema);
 
 module.exports = Tour;
