@@ -21,8 +21,8 @@ module.exports = {
   'parserOptions': {
     'ecmaVersion': 'latest',
   },
-  rules: {
+  'rules': {
     'curly': ['error', 'all'],
-    'semi': ['error', 'always']
-  }
+    'semi': ['error', 'always'],
+  },
 };
