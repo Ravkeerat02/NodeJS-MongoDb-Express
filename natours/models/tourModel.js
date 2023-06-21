@@ -1,35 +1,19 @@
 const mongoose = require('mongoose');
 const slugify = require('slugify');
-const validator = require('validator');
+
+
 const tourSchema = new mongoose.Schema(
   {
     name: {
       type: String,
       required: [true, 'A tour must have a name'],
-      maxLength: [40, 'A tour name must have less or equal than 40 characters'],
-      minLength: [10, 'A tour name must have more or equal than 10 characters'],
-      trim: true,
       unique: true,
-      validate: [
-        {
-          validator: function(value) {
-            // Custom validation to check the actual length
-            return value.length >= 10 && value.length <= 40;
-          },
-          message: 'Tour name must be 10-40 characters long'
-        },
-        {
-          validator: function(value) {
-            // Additional validation to check if name has only letters
-            return validator.isAlpha(value);
-          },
-          message: 'Tour name must only contain letters'
-        }
-      ]
+      trim: true,
+      maxlength: [40, 'A tour name must have less or equal then 40 characters'],
+      minlength: [10, 'A tour name must have more or equal then 10 characters']
+      // validate: [validator.isAlpha, 'Tour name must only contain characters']
     },
-    slug: {
-      type: String
-    },
+    slug: String,
     duration: {
       type: Number,
       required: [true, 'A tour must have a duration']
@@ -40,7 +24,11 @@ const tourSchema = new mongoose.Schema(
     },
     difficulty: {
       type: String,
-      required: [true, 'A tour must have a difficulty']
+      required: [true, 'A tour must have a difficulty'],
+      enum: {
+        values: ['easy', 'medium', 'difficult'],
+        message: 'Difficulty is either: easy, medium, difficult'
+      }
     },
     ratingsAverage: {
       type: Number,
@@ -54,7 +42,7 @@ const tourSchema = new mongoose.Schema(
     },
     price: {
       type: Number,
-      required: [true, 'A tour must have a rating']
+      required: [true, 'A tour must have a price']
     },
     priceDiscount: {
       type: Number,
@@ -68,7 +56,8 @@ const tourSchema = new mongoose.Schema(
     },
     summary: {
       type: String,
-      required: [true, 'A tour must have a summary']
+      trim: true,
+      required: [true, 'A tour must have a description']
     },
     description: {
       type: String,
@@ -81,7 +70,8 @@ const tourSchema = new mongoose.Schema(
     images: [String],
     createdAt: {
       type: Date,
-      default: Date.now()
+      default: Date.now(),
+      select: false
     },
     startDates: [Date],
     secretTour: {
@@ -90,52 +80,53 @@ const tourSchema = new mongoose.Schema(
     }
   },
   {
-    // for the options
     toJSON: { virtuals: true },
     toObject: { virtuals: true }
   }
 );
 
-// DOCUMENT MIDLWARE
-// setting up virtual properties - CANT BE YSED IN QUERY - belongs to the console not the controller
-// arrow functin cant use this directly but a regular dunction can 
-// middleware - can either be before or after a fucntion is being called and processed
-tourSchema.virtual('durationWeek').get(function(){
-  return this.duration / 7 ; 
-})
+tourSchema.virtual('durationWeeks').get(function() {
+  return this.duration / 7;
+});
 
-// // PRE/POST HOOKS - mongoose middleware - runs before save and create 
-// tourSchema.pre('save',function(next){
-//   this.slug = slugify(this.name , {lower: true})
-//   // will refer to next middleware
-//   next()
+// DOCUMENT MIDDLEWARE: runs before .save() and .create()
+tourSchema.pre('save', function(next) {
+  this.slug = slugify(this.name, { lower: true });
+  next();
+});
+
+// tourSchema.pre('save', function(next) {
+//   console.log('Will save document...');
+//   next();
 // });
 
-// tourSchema.post('save',function(doc , next){
+// tourSchema.post('save', function(doc, next) {
 //   console.log(doc);
-//   next()
-// })
+//   next();
+// });
 
-// QUERY MIDDLEWARE - CAN RUN BEFORE/AFTER ANY QUERY
-tourSchema.pre('find',function(next){
-  this.find({
-    secreTOUR : {$ne : 'true'}
-  })
+// QUERY MIDDLEWARE
+// tourSchema.pre('find', function(next) {
+tourSchema.pre(/^find/, function(next) {
+  this.find({ secretTour: { $ne: true } });
+
+  this.start = Date.now();
   next();
-}) 
+});
+
+tourSchema.post(/^find/, function(docs, next) {
+  console.log(`Query took ${Date.now() - this.start} milliseconds!`);
+  next();
+});
+
+// AGGREGATION MIDDLEWARE
+tourSchema.pre('aggregate', function(next) {
+  this.pipeline().unshift({ $match: { secretTour: { $ne: true } } });
+
+  console.log(this.pipeline());
+  next();
+});
+
 const Tour = mongoose.model('Tour', tourSchema);
 
-// Aggregation Middlware - happends before or after an aggreagte function
-tourSchema.pre('aggregate',function(next){
-  
-  // adds in stat of an array
-  this.piepleine().unshift({
-    $match : {secretTour : {$ne : true}}
-  })
-  console.log(this.pipeline());
-  next()
-})
-
 module.exports = Tour;
-
-
