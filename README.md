@@ -48,5 +48,10 @@
       - Unwinding - [Features](https://github.com/Ravkeerat02/NodeJS-MongoDb-Express/blob/main/natours/controller/tourcontroller.js)
     - Virtual Properties - [Features](https://github.com/Ravkeerat02/NodeJS-MongoDb-Express/blob/main/natours/models/tourModel.js)
     - Middleware
-      - Document , Query , Aggregation - [Different Styles](https://github.com/Ravkeerat02/NodeJS-MongoDb-Express/blob/main/natours/models/tourModel.js)   
+   
+      
+  - Error Handling
+    - Playing with ndb -[Error Handling(Chromium)](https://github.com/Ravkeerat02/NodeJS-MongoDb-Express/blob/main/natours/utils/apiFeatures.js)     
+       
+      
        
