@@ -54,6 +54,7 @@
     - Playing with ndb -[3rd Party(Chromium)](https://github.com/Ravkeerat02/NodeJS-MongoDb-Express/blob/main/natours/utils/apiFeatures.js)
     - Route Handling - [Routes Handling](https://github.com/Ravkeerat02/NodeJS-MongoDb-Express/blob/main/natours/app.js)
     - Error Handlimng - [Built In Handling](https://github.com/Ravkeerat02/NodeJS-MongoDb-Express/blob/main/natours/app.js)
+    - Class Handling -[Class](https://github.com/Ravkeerat02/NodeJS-MongoDb-Express/blob/main/natours/controller/errorController.js)
        
       
        
