@@ -51,7 +51,8 @@
    
       
   - Error Handling
-    - Playing with ndb -[Error Handling(Chromium)](https://github.com/Ravkeerat02/NodeJS-MongoDb-Express/blob/main/natours/utils/apiFeatures.js)     
+    - Playing with ndb -[Error Handling(Chromium)](https://github.com/Ravkeerat02/NodeJS-MongoDb-Express/blob/main/natours/utils/apiFeatures.js)
+    - Route Handling - [Error handling(Routes)](https://github.com/Ravkeerat02/NodeJS-MongoDb-Express/blob/main/natours/app.js) 
        
       
        
