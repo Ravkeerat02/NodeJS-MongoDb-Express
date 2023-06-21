@@ -1,6 +1,7 @@
 const express = require('express');
 const morgan = require('morgan');
 
+const AppError = require('./utils/appError');
 const tourRouter = require('./routes/tourRoute');
 const userRouter = require('./routes/userRoute');
 
@@ -25,16 +26,8 @@ app.use('/api/v1/tours', tourRouter);
 
 // error handling - for everything - not relatedd to the above routes
 app.all('*', (req, res, next) => {
-    // res.status(404).json({
-    //   status: 'fail',
-    //   message: `Can't find ${req.originalUrl} on this server!`
-    // });
-    // using built in function to create an error
-    const err = new Error(`Can't find ${req.originalUrl} on this server!`);
-    err.status = 'fail';
-    err.statusCode = 404;
-    // passing error to the next function
-    next(err);
+    
+    next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));
   });
 
 // global error handling middleware
