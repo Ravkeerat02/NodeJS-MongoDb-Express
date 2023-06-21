@@ -1,5 +1,6 @@
 const Tour = require('./../models/tourModel');
 const APIFeatures = require('./../utils/apiFeatures');
+const catchAsync = require('./../utils/catchAsync');
 
 // Calling it out
 exports.aliasTopTour = (req, res, next) => {
@@ -12,8 +13,8 @@ exports.aliasTopTour = (req, res, next) => {
 // Creating a constructor function
 
 
-exports.getAllTours = async (req, res) => {
-  try {
+exports.getAllTours = catchAsync(async (req, res, next) => {
+  
     // Executes query 
     // Runs code for API functionality
     // It gets returned because of using `this` keyword
@@ -32,16 +33,10 @@ exports.getAllTours = async (req, res) => {
         tours,
       },
     });
-  } catch (err) {
-    res.status(404).json({
-      status: 'fail',
-      message: err.message,
-    });
-  }
-};
+});
 
-exports.getTour = async (req, res) => {
-  try {
+exports.getTour = catchAsync(async (req, res, next) => {
+  
     const tour = await Tour.findById(req.params.id);
     res.status(200).json({
       status: 'success',
@@ -49,21 +44,10 @@ exports.getTour = async (req, res) => {
         tour,
       },
     });
-  } catch (err) {
-    res.status(404).json({
-      status: 'fail',
-      message: err.message,
-    });
-  }
-};
-// using this for simplying the error handling
-catchAsync = fn => {
-  return (req , res , next) => {
-    fn(req,res,next).catch(next);
-    };
-  }
+  });
+
 // will return promise , will result in catch if its rejected(not approved)
-exports.createTour = catchAsync(async (req, res) => {
+exports.createTour = catchAsync(async (req, res, next) => {
     const newTour = await Tour.create(req.body);
     res.status(201).json({
       status: 'success',
@@ -73,9 +57,8 @@ exports.createTour = catchAsync(async (req, res) => {
     });  
 });
 
-exports.updateTour = async (req, res) => {
-  try {
-    const tour = await Tour.findByIdAndUpdate(req.params.id, req.body, {
+exports.updateTour = catchAsync(async (req, res, next) => {
+      const tour = await Tour.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
       runValidators: true
     });
@@ -86,32 +69,20 @@ exports.updateTour = async (req, res) => {
         tour
       }
     });
-  } catch (err) {
-    res.status(400).json({
-      status: 'fail',
-      message: err
-    });
-  }
-};
+  });
 
-exports.deleteTour = async (req, res) => {
-  try {
+exports.deleteTour = catchAsync(async (req, res, next) => {
+  
     await Tour.findByIdAndDelete(req.params.id);
     res.status(204).json({
       status: 'success',
       data: null,
       message : 'Requested information is removed successfully'
-    });
-  } catch (err) {
-    res.status(400).json({
-      status: 'fail',
-      message: err
-    });
-  }
-};
+    }); 
+});
 
-exports.getTourStats = async (req,res) => {
-  try {
+exports.getTourStats = catchAsync(async (req, res, next) => {
+  
     // aggregate - similar to playing with query - can manipulate (play around) data
     const stats = await Tour.aggregate([
       // will refer to different stages 
@@ -144,16 +115,10 @@ exports.getTourStats = async (req,res) => {
         stats
       }
     });
-  }catch(err){
-    res.status(400).json({
-      status: 'fail',
-      message: err
-    });
-  }
-}
+  });
 
-exports.getMonthlyPlan = async (req, res) => {
-  try {
+exports.getMonthlyPlan = catchAsync(async (req, res, next) => {
+
     const year = req.params.year * 1;
     const plan = await Tour.aggregate([
       {
@@ -203,11 +168,6 @@ exports.getMonthlyPlan = async (req, res) => {
         plan
       }
     });
-  } catch (err) {
-    res.status(400).json({
-      status: 'fail',
-      message: err
-    });
-  }
-};
+  });
+
 
