@@ -58,8 +58,8 @@
     - Duplication Error - [Duplication Error](https://github.com/Ravkeerat02/NodeJS-MongoDb-Express/blob/main/natours/controller/errorController.js)
     - Validation Error - [Validation Error](https://github.com/Ravkeerat02/NodeJS-MongoDb-Express/blob/main/natours/controller/errorController.js)
     - Exception Handling - [Unhandled Exception](https://github.com/Ravkeerat02/NodeJS-MongoDb-Express/blob/main/natours/server.js)
-   
-  - Authorization , Authentucation and Security
+
+   - Authorization , Authentucation and Security
     -   
        
       
