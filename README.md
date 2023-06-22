@@ -56,6 +56,7 @@
     - Error Handlimng - [Built In Handling](https://github.com/Ravkeerat02/NodeJS-MongoDb-Express/blob/main/natours/app.js)
     - Class Handling -[Class](https://github.com/Ravkeerat02/NodeJS-MongoDb-Express/blob/main/natours/controller/errorController.js)
     - Duplication Error - [Duplication Error](https://github.com/Ravkeerat02/NodeJS-MongoDb-Express/blob/main/natours/controller/errorController.js)
+    - Validation Error - [Validation Error](https://github.com/Ravkeerat02/NodeJS-MongoDb-Express/blob/main/natours/controller/errorController.js)
        
       
        
