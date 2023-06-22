@@ -29,7 +29,8 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: [true, 'Please confirm your password'],
     }
-    })_
+});
+
 
 const User = mongoose.model('User', userSchema);
 module.exports = User;
