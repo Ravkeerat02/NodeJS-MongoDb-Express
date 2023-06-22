@@ -1,6 +1,7 @@
 class APIFeatures {
     constructor(query, queryString) {
-      Object.assign(this, { query, queryString });
+      this.query = query;
+      this.queryString = queryString;
     }
   
     filter(){
