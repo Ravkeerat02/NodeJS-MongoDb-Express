@@ -6,8 +6,13 @@ const router = express.Router();
 
 // Signup - sends the data -similar to creating user
 router.post('/signup', authController.signup);
-
+// login route for the user
+router.post('/login', authController.login);
+// view all user
 router.route('/').get(userController.getAllUsers).post(userController.createUser);
+
+
+router.route('/').get(userController.getAllUsers)
 router.route('/:id').get(userController.getUser).patch(userController.updateUser).delete(userController.deleteUser);
 
 module.exports = router;

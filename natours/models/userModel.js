@@ -24,7 +24,9 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: [true, 'Please provide a password'],
         minlength: 5,
-        maxlength: 24
+        maxlength: 24,
+        // will not show the password in the output
+        select:false
     },
     confirmPassword: {
         type: String,
@@ -47,9 +49,13 @@ userSchema.pre('save', async function(next) {
     this.password = await bcrypt.hashSync(this.password, 12);
     this.confirmPassword = undefined;
     next()
-
-
 })
+
+// insatnce method - available on all documents of a certain collection
+userSchema.methods.correctPassword = async function(candidatePassword, userPassword) {
+    // compares the password
+    return await bcrypt.compare(candidatePassword, userPassword);
+}
 
 
 
