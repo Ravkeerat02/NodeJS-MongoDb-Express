@@ -60,7 +60,8 @@
     - Exception Handling - [Unhandled Exception](https://github.com/Ravkeerat02/NodeJS-MongoDb-Express/blob/main/natours/server.js)
 
    - Authorization , Authentucation and Security
-    -   
+       - Validation(Encryption tech)
+          - Password - [Hashing technique](https://github.com/Ravkeerat02/NodeJS-MongoDb-Express/blob/main/natours/models/userModel.js)       
        
       
        
