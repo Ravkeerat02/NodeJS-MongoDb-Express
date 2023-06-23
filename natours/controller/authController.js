@@ -1,9 +1,11 @@
 const jwt  = require('jsonwebtoken');
+const util = require('util');
+const { promisify } = require('util');
 const User = require('./../models/userModel');
 const catchAsync = require('./../utils/catchAsync');
 const AppError = require('./../utils/appError');
 
-// used for expiration generatio
+// used for expiration generation
 const expiresInDays = 30;
 const expiresInSeconds = expiresInDays * 24 * 60 * 60;
 
@@ -58,5 +60,30 @@ exports.login = catchAsync(async (req, res, next) => {
         status: 'success',
         token
     })
+})
+
+
+exports.protect = catchAsync(async (req, res, next) => {
+    // checking for token 
+    let token ;
+    if(req.headers.authorization && req.headers.authorization.startsWith('Bearer')){
+        // want the 2nd element(1)
+        token = req.headers.authorization.split(' ')[1];
+    }
+   
+    if(!token){
+        return next(new AppError('You are not logged in! Please log in to get access', 401));
+    }
+    // validate token 
+    const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET) ;
+    
+    // check if user still exists
+    const freshUser = await User.findById(decoded.id);
+    if(!freshUser){
+        return next(new AppError('The user belonging to this token does no longer exist', 401));
+    }
+    // check if user changed password after the token was issued
+    freshUser.changedPasswordAfter(decoded.iat);
+    next()
 })
 
