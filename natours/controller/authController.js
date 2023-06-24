@@ -93,6 +93,7 @@ exports.protect = catchAsync(async (req, res, next) => {
     next();
 
 })
+
 // authorization - verifying the right of user v 
 // will return middleware function which we are gonna create
 exports.restrictTo = (...roles) => {
@@ -108,5 +109,25 @@ exports.restrictTo = (...roles) => {
       next();
     };
   };
+
+//   forgot passowrd
+exports.forgotPassword = catchAsync(async (req, res, next) => {
+    // getting user detail 
+    const user = await User.findOne({
+        email : req.body.email
+    })
+    if(!user){
+        return next(new AppError('There is no user with email address', 404));
+    }
+    // generating token - instant method to create the token
+    const resetToken = user.createPasswordResetToken();
+    await user.save({ validateBeforeSave : false});
+    // send it via email 
+})
+
+// reset password
+exports.resetPassword = catchAsync(async (req, res, next) => {
+    
+})
 
 

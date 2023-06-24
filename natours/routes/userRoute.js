@@ -10,6 +10,10 @@ router.post('/signup', authController.signup);
 router.post('/login', authController.login);
 // view all user
 router.route('/').get(userController.getAllUsers).post(userController.createUser);
+// forgot password
+router.post('/forgotPassword', authController.forgotPassword);
+// reset password
+router.post('/resetPassword', authController.resetPassword);
 
 
 router.route('/').get(userController.getAllUsers)
