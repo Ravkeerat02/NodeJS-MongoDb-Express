@@ -63,7 +63,8 @@
        - Validation(Encryption tech)
           - Password - [Hashing technique](https://github.com/Ravkeerat02/NodeJS-MongoDb-Express/blob/main/natours/models/userModel.js)
           - Signup - [Using JWT](https://github.com/Ravkeerat02/NodeJS-MongoDb-Express/blob/main/natours/controller/authController.js)
-          - Authentication [Different Stages](https://github.com/Ravkeerat02/NodeJS-MongoDb-Express/blob/main/natours/controller/authController.js)    
+          - Authentication - [Different Stages](https://github.com/Ravkeerat02/NodeJS-MongoDb-Express/blob/main/natours/controller/authController.js)
+          - Authorization - [Specific user allowd](https://github.com/Ravkeerat02/NodeJS-MongoDb-Express/blob/main/natours/controller/authController.js)    
        
       
        
