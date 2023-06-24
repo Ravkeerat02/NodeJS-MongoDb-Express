@@ -1,13 +1,14 @@
 const jwt  = require('jsonwebtoken');
-const util = require('util');
 const { promisify } = require('util');
 const User = require('./../models/userModel');
 const catchAsync = require('./../utils/catchAsync');
 const AppError = require('./../utils/appError');
 
 // used for expiration generation
-const expiresInDays = 30;
-const expiresInSeconds = expiresInDays * 24 * 60 * 60;
+const expiresInDays = 90;
+const secondsInADay = 24 * 60 * 60;
+const expiresInSeconds = expiresInDays * secondsInADay;
+
 
 
 const signToken = id =>{
@@ -92,4 +93,20 @@ exports.protect = catchAsync(async (req, res, next) => {
     next();
 
 })
+// authorization - verifying the right of user v 
+// will return middleware function which we are gonna create
+exports.restrictTo = (...roles) => {
+    return (req, res, next) => {
+      // roles ['admin', 'lead-guide']
+      if (!roles.includes(req.user.role)) {
+        return next(
+            // prints out the error if needed -403(forbidden)
+          new AppError('You do not have permission to perform this action', 403)
+        );
+      }
+  
+      next();
+    };
+  };
+
 
