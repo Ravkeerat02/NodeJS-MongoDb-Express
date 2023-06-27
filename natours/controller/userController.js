@@ -2,14 +2,13 @@ const User = require('./../models/userModel');
 const catchAsync = require('./../utils/catchAsync');
 const AppError = require('./../utils/appError');
 
-const filterObj = (obj , ...allowedFields) =>{
-  // loop through object and check if its a regular or modified obj 
+const filterObj = (obj, ...allowedFields) => {
   const newObj = {};
-  Object.keys(obj).forEach(el =>{
-    if(allowedFields.includes(el)) return newObj[el] = obj[el];
-  })
-  return newObj
-}
+  Object.keys(obj).forEach(el => {
+    if (allowedFields.includes(el)) newObj[el] = obj[el];
+  });
+  return newObj;
+};
 
 // just setting up routes
 exports.getAllUsers = catchAsync(async(req, res,next) => {
@@ -24,27 +23,33 @@ exports.getAllUsers = catchAsync(async(req, res,next) => {
     });
   });
 
-  // updating current user(name and email)
-  exports.updateMe = catchAsync(async(req , res ,next) =>{
-    // creating error if trying to updae psswd
-    if(req.body.password || req.body.passwordConfirm){
-      return next(new AppError('This route is not for password updates. Please use /updateMyPassword.', 400));
+  exports.updateMe = catchAsync(async (req, res, next) => {
+    // 1) Create error if user POSTs password data
+    if (req.body.password || req.body.passwordConfirm) {
+      return next(
+        new AppError(
+          'This route is not for password updates. Please use /updateMyPassword.',
+          400
+        )
+      );
     }
-
-    // update user doc
-    // filtered extra data followed by udapting data
-    const filteredBody = filterObj(req.body , 'name' , 'email');
-    const udpatedUser = await User.findByIdAndUpdate(req.user.id , filteredBody , {
-      new: true, runValidators: true
+  
+    // 2) Filtered out unwanted fields names that are not allowed to be updated
+    const filteredBody = filterObj(req.body, 'name', 'email');
+  
+    // 3) Update user document
+    const updatedUser = await User.findByIdAndUpdate(req.user.id, filteredBody, {
+      new: true,
+      runValidators: true
     });
-    
+  
     res.status(200).json({
       status: 'success',
-      data:{
-        user : udpatedUser
+      data: {
+        user: updatedUser
       }
-    })
-  })
+    });
+  });
   
 exports.createUser = (req, res) => {
     res.status(500).json({
