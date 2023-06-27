@@ -67,6 +67,9 @@
           - Authorization - [Specific user allowd](https://github.com/Ravkeerat02/NodeJS-MongoDb-Express/blob/main/natours/controller/authController.js)
           - Password Reset -[Forgot Password](https://github.com/Ravkeerat02/NodeJS-MongoDb-Express/blob/main/natours/models/userModel.js)
           - Email - [Forgot Password-continue](https://github.com/Ravkeerat02/NodeJS-MongoDb-Express/blob/main/natours/utils/email.js)
+      
+  - CRUD Operations
+    - Create - [Create user(specific)](https://github.com/Ravkeerat02/NodeJS-MongoDb-Express/blob/main/natours/controller/userController.js)     
        
       
        
