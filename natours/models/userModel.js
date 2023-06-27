@@ -42,6 +42,7 @@ const userSchema = new mongoose.Schema({
   passwordResetToken: String,
   passwordResetExpires: Date,
   active: {
+    // want to hide
     type: Boolean,
     default: true,
     select: false
