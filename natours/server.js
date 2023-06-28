@@ -17,7 +17,7 @@ mongoose.connect(DB , {
 process.on('uncaughtException', err => {
   // shut down applciation  - 0(success) 1(fail)
   console.log('UNCAUGHT EXCEPTION! Shutting down...');
-  co.log(err.name )
+  console.log(err.name )
   server.close(() => {
     process.exit(1);
   })
