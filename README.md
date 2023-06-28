@@ -69,7 +69,8 @@
           - Email - [Forgot Password-continue](https://github.com/Ravkeerat02/NodeJS-MongoDb-Express/blob/main/natours/utils/email.js)
       
   - CRUD Operations
-    - Create - [Create user(specific)](https://github.com/Ravkeerat02/NodeJS-MongoDb-Express/blob/main/natours/controller/userController.js)     
+    - Create - [Create user(specific)](https://github.com/Ravkeerat02/NodeJS-MongoDb-Express/blob/main/natours/controller/userController.js)
+    - Delete - [Delete user(specific)](https://github.com/Ravkeerat02/NodeJS-MongoDb-Express/blob/main/natours/controller/userController.js)     
        
       
        
