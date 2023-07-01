@@ -71,7 +71,10 @@
   - CRUD Operations
     - Create - [Create user(specific)](https://github.com/Ravkeerat02/NodeJS-MongoDb-Express/blob/main/natours/controller/userController.js)
     - Delete - [Delete user(specific)](https://github.com/Ravkeerat02/NodeJS-MongoDb-Express/blob/main/natours/controller/userController.js)
-    - Update - [Update user(specific)](https://github.com/Ravkeerat02/NodeJS-MongoDb-Express/blob/main/natours/controller/userController.js)     
+    - Update - [Update user(specific)](https://github.com/Ravkeerat02/NodeJS-MongoDb-Express/blob/main/natours/controller/userController.js)
+   
+  - Additional Features
+    - Cookie - [Session Cookie](https://github.com/Ravkeerat02/NodeJS-MongoDb-Express/blob/main/natours/controller/authController.js)        
        
       
        
