@@ -74,7 +74,8 @@
     - Update - [Update user(specific)](https://github.com/Ravkeerat02/NodeJS-MongoDb-Express/blob/main/natours/controller/userController.js)
    
   - Additional Features
-    - Cookie - [Session Cookie](https://github.com/Ravkeerat02/NodeJS-MongoDb-Express/blob/main/natours/controller/authController.js)        
+    - Cookie - [Session Cookie](https://github.com/Ravkeerat02/NodeJS-MongoDb-Express/blob/main/natours/controller/authController.js)
+    - Rate Limiting - [Limits the entry](https://github.com/Ravkeerat02/NodeJS-MongoDb-Express/blob/main/natours/app.js)      
        
       
        
