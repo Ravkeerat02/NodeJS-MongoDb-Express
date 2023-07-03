@@ -4,6 +4,9 @@ const rateLimit = require('express-rate-limit');
 const helmet = require('helmet');
 const mongoSanitze = require('express-mongo-sanitize');
 const xss = require('xss-clean')
+// hyper parameter protecti
+const hpp = require('hpp') 
+
 const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controller/errorController');
 const tourRouter = require('./routes/tourRoute');
@@ -29,7 +32,6 @@ const limiter = rateLimit({
 
 app.use('/api', limiter)
 
-app.use(helmet());
 
 // body parser, reading data from body into req.body
 app.use(express.json({
@@ -41,6 +43,12 @@ app.use(mongoSanitze())
 
 // app -  cross site scripting attacks - removes malicious HTML code
 app.use(xss())
+
+// prevents paramter pollution 
+app.use(hpp({
+  // array of properties that are allowed to be duplicated
+  whitelist : ['duration', 'ratingsQuantity', 'ratingsAverage', 'maxGroupSize', 'difficulty', 'price']
+}));
 
   
 // setting up static

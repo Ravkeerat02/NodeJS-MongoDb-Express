@@ -20,7 +20,7 @@ class APIFeatures {
   
     sort(){
       if(this.queryString.sort){
-        // Returns array of all the name
+        // Returns array of all the name - only works on string
         const sortBy = this.queryString.sort.split(',').join(' ');
         this.query = this.query.sort(sortBy);
       } else {
