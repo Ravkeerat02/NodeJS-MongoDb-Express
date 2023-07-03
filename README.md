@@ -77,7 +77,9 @@
     - Cookie - [Session Cookie](https://github.com/Ravkeerat02/NodeJS-MongoDb-Express/blob/main/natours/controller/authController.js)
     - Rate Limiting - [Limits the entry](https://github.com/Ravkeerat02/NodeJS-MongoDb-Express/blob/main/natours/app.js)
     - Data Sanitization - [Additional Security](https://github.com/Ravkeerat02/NodeJS-MongoDb-Express/blob/main/natours/app.js)
-    - Paramater Protection - [Using HPP](https://github.com/Ravkeerat02/NodeJS-MongoDb-Express/blob/main/natours/app.js)      
-       
+    - Paramater Protection - [Using HPP](https://github.com/Ravkeerat02/NodeJS-MongoDb-Express/blob/main/natours/app.js)
+   
+  - Data Modeling
+    - GeoLocation - [Setup](https://github.com/Ravkeerat02/NodeJS-MongoDb-Express/blob/main/natours/models/tourModel.js)
       
        
