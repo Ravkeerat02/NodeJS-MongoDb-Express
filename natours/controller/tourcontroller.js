@@ -1,5 +1,5 @@
 const Tour = require('../models/tourModel');
-const APIFeatures = require('../utils/apiFeatures');
+// const APIFeatures = require('../utils/apiFeatures');
 const catchAsync = require('../utils/catchAsync');
 const factory = require('./handlerFactory')
 
@@ -15,41 +15,9 @@ exports.aliasTopTour = (req, res, next) => {
 // Creating a constructor function
 
 
-exports.getAllTours = catchAsync(async (req, res, next) => {
-  
-    // Executes query 
-    // Runs code for API functionality
-    // It gets returned because of using `this` keyword
-    const features = new APIFeatures(Tour.find(), req.query).
-    filter()
-    .sort()
-    .limitFields()
-    .paginate();
-    const tours = await features.query; 
-
-    // Sends response
-    res.status(200).json({
-      status: 'success',
-      results: tours.length,
-      data: {
-        tours,
-      },
-    });
-});
-
-exports.getTour = catchAsync(async (req, res, next) => {
-  
-    const tour = await Tour.findById(req.params.id).populate('reviews');
-    res.status(200).json({
-      status: 'success',
-      data: {
-        tour,
-      },
-    });
-  });
-
-// will return promise , will result in catch if its rejected(not approved)
-
+exports.getAllTours = factory.getAll(Tour);
+// simplifying the functions
+exports.getTour = factory.getOne(Tour , {path : 'reviews'});
 exports.updateTour = factory.updateOne(Tour)
 exports.deleteTour = factory.deleteOne(Tour)
 exports.createTour = factory.createOne(Tour)
