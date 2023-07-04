@@ -1,6 +1,6 @@
-const Tour = require('./../models/tourModel');
-const APIFeatures = require('./../utils/apiFeatures');
-const catchAsync = require('./../utils/catchAsync');
+const Tour = require('../models/tourModel');
+const APIFeatures = require('../utils/apiFeatures');
+const catchAsync = require('../utils/catchAsync');
 const factory = require('./handlerFactory')
 
 
@@ -49,31 +49,10 @@ exports.getTour = catchAsync(async (req, res, next) => {
   });
 
 // will return promise , will result in catch if its rejected(not approved)
-exports.createTour = catchAsync(async (req, res, next) => {
-    const newTour = await Tour.create(req.body);
-    res.status(201).json({
-      status: 'success',
-      data: {
-        tour: newTour
-      }
-    });  
-});
 
-exports.updateTour = catchAsync(async (req, res, next) => {
-      const tour = await Tour.findByIdAndUpdate(req.params.id, req.body, {
-      new: true,
-      runValidators: true
-    });
-
-    res.status(200).json({
-      status: 'success',
-      data: {
-        tour
-      }
-    });
-  });
-
+exports.updateTour = factory.updateOne(Tour)
 exports.deleteTour = factory.deleteOne(Tour)
+exports.createTour = factory.createOne(Tour)
 
 exports.getTourStats = catchAsync(async (req, res, next) => {
   
