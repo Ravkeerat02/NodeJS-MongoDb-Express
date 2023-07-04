@@ -83,6 +83,6 @@
     - GeoLocation - [Setup](https://github.com/Ravkeerat02/NodeJS-MongoDb-Express/blob/main/natours/models/tourModel.js)
     - Review
       - Create - [Creating(setup)](https://github.com/Ravkeerat02/NodeJS-MongoDb-Express/blob/main/natours/routes/reviewRoute.js)
-      - Populating - [Dispalying mroe info]((https://github.com/Ravkeerat02/NodeJS-MongoDb-Express/blob/main/natours/models/reviewModel.js))  
+      - Populating - [Dispalying mroe info](https://github.com/Ravkeerat02/NodeJS-MongoDb-Express/blob/main/natours/models/reviewModel.js)  
       
        
