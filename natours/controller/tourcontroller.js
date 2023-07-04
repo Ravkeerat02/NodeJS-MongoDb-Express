@@ -1,6 +1,7 @@
 const Tour = require('./../models/tourModel');
 const APIFeatures = require('./../utils/apiFeatures');
 const catchAsync = require('./../utils/catchAsync');
+const factory = require('./handlerFactory')
 
 
 // Calling it out
@@ -72,15 +73,7 @@ exports.updateTour = catchAsync(async (req, res, next) => {
     });
   });
 
-exports.deleteTour = catchAsync(async (req, res, next) => {
-  
-    await Tour.findByIdAndDelete(req.params.id);
-    res.status(204).json({
-      status: 'success',
-      data: null,
-      message : 'Requested information is removed successfully'
-    }); 
-});
+exports.deleteTour = factory.deleteOne(Tour)
 
 exports.getTourStats = catchAsync(async (req, res, next) => {
   
