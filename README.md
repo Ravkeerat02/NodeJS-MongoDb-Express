@@ -86,6 +86,9 @@
       - Populating - [Dispalying mroe info](https://github.com/Ravkeerat02/NodeJS-MongoDb-Express/blob/main/natours/models/reviewModel.js)
       - Nested Routes - [Navigation](https://github.com/Ravkeerat02/NodeJS-MongoDb-Express/blob/main/natours/routes/tourRoute.js)
       - GET/POST by ID - [Selected Review](https://github.com/Ravkeerat02/NodeJS-MongoDb-Express/blob/main/natours/routes/tourRoute.js)
+     
+    - Improving Functionality
+      -Delete - [Deletes specfic](https://github.com/Ravkeerat02/NodeJS-MongoDb-Express/blob/main/natours/controller/handlerFactory,js.)
 
       
        
