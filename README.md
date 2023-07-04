@@ -88,7 +88,8 @@
       - GET/POST by ID - [Selected Review](https://github.com/Ravkeerat02/NodeJS-MongoDb-Express/blob/main/natours/routes/tourRoute.js)
      
     - Improving Functionality
-      -Delete - [Deletes specfic](https://github.com/Ravkeerat02/NodeJS-MongoDb-Express/blob/main/natours/controller/handlerFactory,js.)
+      - Delete - [Deletes specfic](https://github.com/Ravkeerat02/NodeJS-MongoDb-Express/blob/main/natours/controller/handlerFactory,js.)
+      - Create/Update - [Specfic](https://github.com/Ravkeerat02/NodeJS-MongoDb-Express/blob/main/natours/controller/handlerFactory,js.)
 
       
        
