@@ -90,6 +90,8 @@
     - Improving Functionality
       - Delete - [Deletes specfic](https://github.com/Ravkeerat02/NodeJS-MongoDb-Express/blob/main/natours/controller/handlerFactory,js.)
       - Create/Update - [Specfic](https://github.com/Ravkeerat02/NodeJS-MongoDb-Express/blob/main/natours/controller/handlerFactory,js.)
+      - Get One(All) - [Get Data](https://github.com/Ravkeerat02/NodeJS-MongoDb-Express/blob/main/natours/controller/handlerFactory,js.)
+      - Endpoint - [/Me](natours/controller/userController.js)
 
       
        
