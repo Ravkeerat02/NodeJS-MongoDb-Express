@@ -56,11 +56,11 @@ exports.createUser = (req, res) => {
     });
   };
 
-exports.getMe = (req , res , next) =>{
+exports.getMe = (req, res, next) => {
   req.params.id = req.user.id;
-  next()
-}
-  
+  next();
+  };
+
 exports.getAllUsers = factory.getAll(User);
 exports.getUser = factory.getOne(User);
 exports.updateUser = factory.updateOne(User);

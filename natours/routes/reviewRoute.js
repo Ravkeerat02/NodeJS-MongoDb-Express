@@ -7,6 +7,7 @@ const router = express.Router({ mergeParams: true });
 // Apply protect middleware to all routes
 router.use(authController.protect);
 
+
 router
   .route('/')
   .get(reviewController.getAllReviews)
