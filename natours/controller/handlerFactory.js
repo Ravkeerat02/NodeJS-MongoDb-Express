@@ -2,6 +2,7 @@
 // helper file which works as the main file and can be used to perform any fucntion with just the name of it
 const AppError = require("../utils/appError");
 const catchAsync = require("../utils/catchAsync");
+const APIFeatures = require("../utils/apiFeatures");
 
 
 exports.deleteOne = Model => catchAsync(async (req, res, next) => {
@@ -69,7 +70,7 @@ exports.getAll = Model => catchAsync(async (req, res, next) => {
         .limitFields()
         .paginate();
     // const doc = await features.query.explain();
-    const doc = await features.query;
+    const doc = await features.query.explain();
 
     // SEND RESPONSE
     res.status(200).json({
