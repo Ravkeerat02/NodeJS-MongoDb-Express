@@ -52,4 +52,3 @@ if(process.argv[2] === '--import'){
   deleteData()
 }
 
-

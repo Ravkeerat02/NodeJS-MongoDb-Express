@@ -1,5 +1,5 @@
 const express = require('express');
-const tourController = require('../controller/tourController');
+const tourController = require('./../controller/tourController');
 const authController = require('./../controller/authController');
 const reviewRouter = require('./../routes/reviewRoute');
 
@@ -7,7 +7,7 @@ const router = express.Router();
 
 // router.param('id', tourController.checkID);
 // this is used to call the specific routes
-router.route('/top-5-cheap').get(tourController.aliasTopTour, tourController.getAllTours);
+router.route('/top-5-cheap').get(tourController.aliasTopTours, tourController.getAllTours);
 
 router.route('/tour-stats').get(tourController.getTourStats);
 
@@ -15,6 +15,8 @@ router.route('/monthly-plan/:year').get(
   authController.protect,
   authController.restrictTo('admin', 'lead-guide','guide'),
   tourController.getMonthlyPlan);
+
+router.route('/tours-within/:distance/center/:latlng/unit/:unit').get(tourController.getToursWithin);
 
 router
   .route('/')
