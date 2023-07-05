@@ -94,8 +94,8 @@ exports.getMonthlyPlan = catchAsync(async (req, res, next) => {
   });
 });
 
-// /tours-within/:distance/center/:latlng/unit/:unit
-// /tours-within/233/center/34.111745,-118.113491/unit/mi
+
+// /tours-within/233/center/34.111745,-118.113491/unit/mi - example
 exports.getToursWithin = catchAsync(async (req, res, next) => {
   const { distance, latlng, unit } = req.params;
   const [lat, lng] = latlng.split(',');
@@ -124,7 +124,7 @@ exports.getToursWithin = catchAsync(async (req, res, next) => {
   });
 });
 
-
+// it gets distance between 2 points 
 exports.getDistances = catchAsync(async (req, res, next) => {
   const { latlng, unit } = req.params;
   const [lat, lng] = latlng.split(',');
@@ -132,21 +132,20 @@ exports.getDistances = catchAsync(async (req, res, next) => {
   const multiplier = unit === 'mi' ? 0.000621371 : 0.001;
 
   if (!lat || !lng) {
-    next(
-      new AppError(
-        'Please provide latitutr and longitude in the format lat,lng.',
-        400
-      )
-    );
+    next(new AppError('Please provide latitutde and longitude in the format lat,lng.',400));
   }
-
+  
+  // calcualtes the distances
   const distances = await Tour.aggregate([
     {
+      // geoNear always needs to be the first stage - One field must be geospatial index
       $geoNear: {
+        // from where to calcualte distances
         near: {
           type: 'Point',
           coordinates: [lng * 1, lat * 1]
         },
+        //calculated distances stored
         distanceField: 'distance',
         distanceMultiplier: multiplier
       }
