@@ -94,6 +94,9 @@
       - Endpoint - [/Me](natours/controller/userController.js)
       - Imporved Security - [Authorization/Authentication](https://github.com/Ravkeerat02/NodeJS-MongoDb-Express/tree/main/natours/routes)
       - Navigation/Direction -[GeoSpatial Features](https://github.com/Ravkeerat02/NodeJS-MongoDb-Express/blob/main/natours/controller/tourcontroller.js)
+     
+    - Website Creation
+      - Setup - [Template Creation](https://github.com/Ravkeerat02/NodeJS-MongoDb-Express/blob/main/natours/views/base.pug)
 
       
        
