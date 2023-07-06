@@ -5,8 +5,9 @@ const helmet = require('helmet');
 const mongoSanitze = require('express-mongo-sanitize');
 const xss = require('xss-clean')
 // hyper parameter protection
-const hpp = require('hpp') 
-
+const hpp = require('hpp')
+// creates the right path
+const path = require('path') 
 const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controller/errorController');
 const tourRouter = require('./routes/tourRoute');
@@ -15,6 +16,15 @@ const reviewRouter = require('./routes/reviewRoute');
 
 const app = express();
 
+// setting up view engine
+app.set('view engine','pug')
+// setting up locations of veiws
+app.set('views',path.join(__dirname, 'views'));
+
+
+
+// setting up static
+app.use(express.static(path.join(__dirname,'public')))
 
 // Middleware
 
@@ -52,10 +62,11 @@ app.use(hpp({
 }));
 
 
-// setting up static
-app.use(express.static(`${__dirname}/public`))
-
 // API routes
+app.get('/',(req,res)=>{
+    res.status(200).render('base')
+})
+
 app.use('/api/v1/users', userRouter);
 app.use('/api/v1/tours', tourRouter);
 app.use('/api/v1/reviews', reviewRouter);
