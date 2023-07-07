@@ -99,7 +99,8 @@
       - Setup - [Template Creation](https://github.com/Ravkeerat02/NodeJS-MongoDb-Express/blob/main/natours/views/base.pug)
       - Template - [Populate(Setup)](https://github.com/Ravkeerat02/NodeJS-MongoDb-Express/tree/main/natours/views)
       - Naviagtion
-        - Overview - [Overvieww](https://github.com/Ravkeerat02/NodeJS-MongoDb-Express/blob/main/natours/views/overview.pug)   
+        - Overview - [Overview](https://github.com/Ravkeerat02/NodeJS-MongoDb-Express/blob/main/natours/views/overview.pug)
+        - Tour - [Tour](https://github.com/Ravkeerat02/NodeJS-MongoDb-Express/blob/main/natours/views/tour.pug)   
 
       
        
