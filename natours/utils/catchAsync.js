@@ -1,6 +1,8 @@
-module.exports = // using this for simplying the error handling
-catchAsync = fn => {
-  return (req , res , next) => {
-    fn(req,res,next).catch(next);
-    };
-  }
+module.exports = fn => {
+  return (req, res, next) => {
+    fn(req, res, next).catch(err => {
+      console.log(err.stack);
+      next(err);
+    });
+  };
+};
