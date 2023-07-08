@@ -15,6 +15,7 @@ const createTokenAndCookie = (user, statusCode, res) => {
   const token = signToken(user._id);
   const cookieOptions = {
     expires: new Date(Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000),
+    // cant maniuplate cookie in browser
     httpOnly: true
   };
 
@@ -54,6 +55,14 @@ exports.login = catchAsync(async (req, res, next) => {
 
   createTokenAndCookie(user, 200, res);
 });
+
+exports.logout = (req, res) => {
+  res.cookie('jwt', 'loggedout', {
+    expires: new Date(Date.now() + 10 * 1000),
+    httpOnly : true 
+  })
+  res.status(200).json({ status: 'success' });
+}
 
 exports.protect = catchAsync(async (req, res, next) => {
   let token;
@@ -96,22 +105,33 @@ exports.restrictTo = (...roles) => {
   };
 };
 
-exports.isLoggedIn = catchAsync(async (req, res, next) => {
-  if (req.cookies.jwt) {
-    const decoded = await promisify(jwt.verify)(req.cookies.jwt, process.env.JWT_SECRET);
-
-
-    if (decoded) {
-      const currentUser = await User.findById(decoded.id);
-
-      if (currentUser && !currentUser.changedPasswordAfter(decoded.iat)) {
-        res.locals.user = currentUser;
-      }
+exports.isLoggedIn = async (req, res, next) => {
+  if(req.cookies.jwt){
+    // verifying token
+    try{
+      const decode = await promisify(jwt.verify)(
+      req.cookies.jwt,
+      process.env.JWT_SECRET
+    );
+    // check if user still exists
+    const currentUser = await User.findById(decode.id);
+    if (!currentUser) {
+      return next();
     }
-  }
 
-  next();
-});
+    // check if user changed password after token was issued
+    if (currentUser.changedPasswordAfter(decode.iat)) {
+      return next();
+    }
+    // there is a logged in user
+    res.locals.user = currentUser;
+    return next();
+  }catch(err){
+    return next();
+  }
+}
+  next()
+}
 
 exports.forgotPassword = catchAsync(async (req, res, next) => {
   const user = await User.findOne({ email: req.body.email });
