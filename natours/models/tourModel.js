@@ -139,6 +139,21 @@ tourSchema.pre('save', function(next) {
   next();
 });
 
+// tourSchema.pre('save', async function(next) {
+//   const guidesPromises = this.guides.map(async id => await User.findById(id));
+//   this.guides = await Promise.all(guidesPromises);
+//   next();
+// });
+
+// tourSchema.pre('save', function(next) {
+//   console.log('Will save document...');
+//   next();
+// });
+
+// tourSchema.post('save', function(doc, next) {
+//   console.log(doc);
+//   next();
+// });
 
 // QUERY MIDDLEWARE
 // tourSchema.pre('find', function(next) {
@@ -163,6 +178,14 @@ tourSchema.post(/^find/, function(docs, next) {
   next();
 });
 
+// AGGREGATION MIDDLEWARE
+// tourSchema.pre('aggregate', function(next) {
+//   this.pipeline().unshift({ $match: { secretTour: { $ne: true } } });
+
+//   console.log(this.pipeline());
+//   next();
+// });
 
 const Tour = mongoose.model('Tour', tourSchema);
+
 module.exports = Tour;
