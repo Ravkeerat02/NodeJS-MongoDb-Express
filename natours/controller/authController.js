@@ -50,20 +50,15 @@ exports.signup = catchAsync(async (req, res, next) => {
 exports.login = catchAsync(async (req, res, next) => {
   const { email, password } = req.body;
 
+  // 1) Check if email and password exist
   if (!email || !password) {
-    return next(new AppError('Please provide email and password', 400));
+    // error being caused again and again
+    return next(new AppError('Please provide email and password!', 400));
   }
 
-  const user = await User.findOne({ email }).select('+password');
-  const validPassword = user && await user.correctPassword(password, user.password);
-
-  if (!validPassword) {
-    return next(new AppError('Incorrect email or password', 401));
-  }
-
-  createSendToken(user, 200, res);
+  // 2) Call a separate function to handle user authentication
+  await authenticateUser(email, password, req, res, next);
 });
-
 
 exports.logout = (req, res) => {
   res.cookie('jwt', 'loggedout', {
