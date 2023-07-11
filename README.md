@@ -102,7 +102,9 @@
         - Overview - [Overview](https://github.com/Ravkeerat02/NodeJS-MongoDb-Express/blob/main/natours/views/overview.pug)
         - Tour - [Tour](https://github.com/Ravkeerat02/NodeJS-MongoDb-Express/blob/main/natours/views/tour.pug)   
       - Login/Logout -[Login/Logout](https://github.com/Ravkeerat02/NodeJS-MongoDb-Express/blob/main/natours/public/js/login.js)
-        - **Note:** This section is under development. Funcionality implemented but not working properly  
+        - **Note:** This section is under development. Funcionality implemented but not working properly
+      - Image -[Upload/Resize](https://github.com/Ravkeerat02/NodeJS-MongoDb-Express/blob/main/natours/controller/userController.js) 
+        
 
       
        
