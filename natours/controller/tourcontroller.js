@@ -5,6 +5,7 @@ const catchAsync = require('./../utils/catchAsync');
 const factory = require('./handlerFactory');
 const AppError = require('./../utils/appError');
 
+// shared in the memeory
 const multerStorage = multer.memoryStorage();
 
 const multerFilter = (req, file, cb) => {
@@ -20,15 +21,15 @@ const upload = multer({
   fileFilter: multerFilter
 });
 
+// sets the image limit - for mix
 exports.uploadTourImages = upload.fields([
   { name: 'imageCover', maxCount: 1 },
   { name: 'images', maxCount: 3 }
 ]);
 
-// upload.single('image') req.file
-// upload.array('images', 5) req.files
 
 exports.resizeTourImages = catchAsync(async (req, res, next) => {
+  // middlware - created for multuple files
   if (!req.files.imageCover || !req.files.images) return next();
 
   // 1) Cover image

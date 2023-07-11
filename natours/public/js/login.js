@@ -1,8 +1,7 @@
+const axios = require('axios');
+const { showAlert } = require('./alert');
 
-import axios from 'axios';
-import { showAlert } from './alert';
-
-export const login = async (email, password) => {
+exports.login = async (email, password) => {
   try {
     const res = await axios({
       method: 'POST',
@@ -24,13 +23,12 @@ export const login = async (email, password) => {
   }
 };
 
-export const logout = async () => {
+exports.logout = async () => {
   try {
     const res = await axios({
       method: 'GET',
       url: 'http://127.0.0.1:3000/api/v1/users/logout'
     });
-    // forece reaload from server
     if ((res.data.status = 'success')) location.reload(true);
   } catch (err) {
     console.log(err.response);
