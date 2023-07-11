@@ -5,15 +5,7 @@ const catchAsync = require('./../utils/catchAsync');
 const AppError = require('./../utils/appError');
 const factory = require('./handlerFactory');
 
-// const multerStorage = multer.diskStorage({
-//   destination: (req, file, cb) => {
-//     cb(null, 'public/img/users');
-//   },
-//   filename: (req, file, cb) => {
-//     const ext = file.mimetype.split('/')[1];
-//     cb(null, `user-${req.user.id}-${Date.now()}.${ext}`);
-//   }
-// });
+// stores in the memory as buffer
 const multerStorage = multer.memoryStorage();
 
 const multerFilter = (req, file, cb) => {
@@ -31,17 +23,23 @@ const upload = multer({
 
 exports.uploadUserPhoto = upload.single('photo');
 
+// middleware function - resize the image
 exports.resizeUserPhoto = catchAsync(async (req, res, next) => {
+  // if no file - then go to next
   if (!req.file) return next();
-
+  // will always be JPEG
   req.file.filename = `user-${req.user.id}-${Date.now()}.jpeg`;
-
+  // Image libary - helps in resizing
   await sharp(req.file.buffer)
+    // crops the image - makes it fit the shape
     .resize(500, 500)
+    // converts to jpeg
     .toFormat('jpeg')
+    // compress the quality of the picture
     .jpeg({ quality: 90 })
+    // stores the image
     .toFile(`public/img/users/${req.file.filename}`);
-
+  // FINISHS IT AND MOVES TO NEXT
   next();
 });
 
@@ -71,6 +69,7 @@ exports.updateMe = catchAsync(async (req, res, next) => {
 
   // 2) Filtered out unwanted fields names that are not allowed to be updated
   const filteredBody = filterObj(req.body, 'name', 'email');
+  // STORING IMAGE NAME TO DOCS 
   if (req.file) filteredBody.photo = req.file.filename;
 
   // 3) Update user document

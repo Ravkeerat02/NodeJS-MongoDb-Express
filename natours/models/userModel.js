@@ -15,6 +15,7 @@ const userSchema = new mongoose.Schema({
     lowercase: true,
     validate: [validator.isEmail, 'Please provide a valid email']
   },
+  // used for storing photo - default - for new user - when nothing is slected
   photo: {
     type: String,
     default: 'default.jpg'
