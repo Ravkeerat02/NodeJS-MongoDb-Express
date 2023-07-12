@@ -8,19 +8,17 @@ const xss = require('xss-clean');
 const hpp = require('hpp');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
-// reducing the size from large to small
 const compression = require('compression');
-// wors for server side code
-const cors = require('cors');
+// const cors = require('cors');
+
 const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controller/errorController');
 const tourRouter = require('./routes/tourRoute');
 const userRouter = require('./routes/userRoute');
 const reviewRouter = require('./routes/reviewRoute');
-const viewRouter = require('./routes/viewRoutes');
 const bookingRouter = require('./routes/bookingRoute');
 // const bookingController = require('./controller/bookingController');
-
+const viewRouter = require('./routes/viewRoutes');
 
 // Start express app
 const app = express();
@@ -32,21 +30,21 @@ app.set('views', path.join(__dirname, 'views'));
 
 // 1) GLOBAL MIDDLEWARES
 // Implement CORS
-app.use(cors());
-// Access-Control-Allow-Origin *
-// api.natours.com, front-end natours.com
-// app.use(cors({
-//   origin: 'https://www.natours.com'
-// }))
+// app.use(cors());
+// // Access-Control-Allow-Origin *
+// // api.natours.com, front-end natours.com
+// // app.use(cors({
+// //   origin: 'https://www.natours.com'
+// // }))
 
-app.options('*', cors());
+// app.options('*', cors());
 // app.options('/api/v1/tours/:id', cors());
 
 // Serving static files
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Set security HTTP headers
-// app.use(helmet());
+app.use(helmet());
 
 // Development logging
 if (process.env.NODE_ENV === 'development') {
