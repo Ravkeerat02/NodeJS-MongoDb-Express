@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 
+// used to store the booking data
 const bookingSchema = new mongoose.Schema({
   tour: {
     type: mongoose.Schema.ObjectId,
