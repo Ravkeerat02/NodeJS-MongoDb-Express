@@ -1,7 +1,7 @@
 const axios = require('axios');
 const { showAlert } = require('./alert');
 
-exports.login = async (email, password) => {
+const login = async (email, password) => {
   try {
     const res = await axios({
       method: 'POST',
@@ -14,7 +14,7 @@ exports.login = async (email, password) => {
 
     if (res.data.status === 'success') {
       showAlert('success', 'Logged in successfully!');
-      window.setTimeout(() => {
+      setTimeout(() => {
         location.assign('/');
       }, 1500);
     }
@@ -23,15 +23,17 @@ exports.login = async (email, password) => {
   }
 };
 
-exports.logout = async () => {
+const logout = async () => {
   try {
     const res = await axios({
       method: 'GET',
       url: 'http://127.0.0.1:3000/api/v1/users/logout'
     });
-    if ((res.data.status = 'success')) location.reload(true);
+    if ((res.data.status === 'success')) location.reload(true);
   } catch (err) {
     console.log(err.response);
     showAlert('error', 'Error logging out! Try again.');
   }
 };
+
+export { login, logout };
