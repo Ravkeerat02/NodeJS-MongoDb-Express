@@ -2,7 +2,6 @@
 import '@babel/polyfill';
 import { displayMap } from './mapbox';
 import { login, logout } from './login';
-import { updateData } from './updateSetting';
 import {bookTour} from './stripe'
 
 // DOM ELEMENTS
