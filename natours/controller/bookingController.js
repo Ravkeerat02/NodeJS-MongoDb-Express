@@ -13,25 +13,24 @@ exports.getCheckoutSession = catchAsync(async (req, res, next) => {
 
 const session = await stripe.checkout.sessions.create({
     payment_method_types: ['card'],
+    // succesful payment
     success_url: `${req.protocol}://${req.get('host')}/?tour=${req.params.tourId}&user=${req.user.id}&price=${tour.price}`,
+    // failed paymet
     cancel_url: `${req.protocol}://${req.get('host')}/tour/${tour.slug}`,
+    // user info
     customer_email: req.user.email,
     client_reference_id: req.params.tourId,
-    line_items: [
+    line_items:[
       {
-        price_data: {
-          currency: 'usd',
-          unit_amount: tour.price * 100,
-          product_data: {
-            name: tour.name,
-            description: tour.summary,
-          },
-        },
+        name: `${tour.name} Tour`,
+        description: tour.summary,
+        images: [`https://www.natours.dev/img/tours/${tour.imageCover}`],
+        amount: tour.price * 100, // in cents
+        currency: 'usd',
         quantity: 1,
-      },
-    ],
-    mode: 'payment',
-  });
+      }
+    ]
+  })
   
   res.status(200).json({
     status: 'success',
@@ -45,7 +44,8 @@ exports.createBookingCheckout = catchAsync(async (req, res, next) => {
 
   if (!tour && !user && !price) return next();
   await Booking.create({ tour, user, price });
-
+  
+  // creates new request with the same url but without query string
   res.redirect(req.originalUrl.split('?')[0]);
 });
 
