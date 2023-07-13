@@ -20,8 +20,6 @@ const bookingRouter = require('./routes/bookingRoute');
 // const bookingController = require('./controller/bookingController');
 const viewRouter = require('./routes/viewRoutes');
 
-import '@babel/polyfill';
-
 // Start express app
 const app = express();
 
