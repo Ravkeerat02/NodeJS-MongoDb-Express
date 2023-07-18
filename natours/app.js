@@ -10,14 +10,13 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const compression = require('compression');
 // const cors = require('cors');
-
 const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controller/errorController');
 const tourRouter = require('./routes/tourRoute');
 const userRouter = require('./routes/userRoute');
 const reviewRouter = require('./routes/reviewRoute');
 const bookingRouter = require('./routes/bookingRoute');
-// const bookingController = require('./controller/bookingController');
+const bookingController = require('./controller/bookingController');
 const viewRouter = require('./routes/viewRoutes');
 
 // Start express app
@@ -37,8 +36,8 @@ app.set('views', path.join(__dirname, 'views'));
 // //   origin: 'https://www.natours.com'
 // // }))
 
-// app.options('*', cors());
-// app.options('/api/v1/tours/:id', cors());
+app.options('*', cors());
+app.options('/api/v1/tours/:id', cors());
 
 // Serving static files
 app.use(express.static(path.join(__dirname, 'public')));
@@ -59,12 +58,9 @@ const limiter = rateLimit({
 });
 app.use('/api', limiter);
 
-// // Stripe webhook, BEFORE body-parser, because stripe needs the body as stream
-// app.post(
-//   '/webhook-checkout',
-//   bodyParser.raw({ type: 'application/json' }),
-//   bookingController.webhookCheckout
-// );
+// // Stripe webhook, BEFORE body-parser, because stripe needs the body as 
+app.post('/webhook-checkout', express.json(), bookingController.webhookCheckout);
+
 
 // Body parser, reading data from body into req.body
 app.use(express.json({ limit: '10kb' }));
