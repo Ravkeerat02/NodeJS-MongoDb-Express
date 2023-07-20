@@ -22,8 +22,6 @@ export const login = async (email, password) => {
   } catch (err) {
     showAlert('error', err.response.data.message);
   }
-
-  console.log(res.data);
 };
 
 export const logout = async () => {
@@ -42,4 +40,4 @@ export const logout = async () => {
 
 
 // calling out function
-login()
+login(email, password)
